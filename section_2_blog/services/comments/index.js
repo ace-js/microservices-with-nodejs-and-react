@@ -11,9 +11,9 @@ const commentsByPostID = {};
 
 app.get('/posts/:id/comments', (req, res) => {
   const { id } = req.params;
-  const comments = commentsByPostID[id];
+  const comments = commentsByPostID[id] || [];
   
-  return comments ? res.send(comments) : res.status(404).send();
+  res.send(comments);
 });
 
 app.post('/posts/:id/comments', (req, res) => {
