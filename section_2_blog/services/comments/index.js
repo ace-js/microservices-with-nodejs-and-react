@@ -5,7 +5,7 @@ const uuid = require('uuid').v4;
 
 const app = express();
 app.use(bodyParser.json());
-app.use(cors())
+app.use(cors());
 
 const commentsByPostID = {};
 
