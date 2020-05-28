@@ -2,7 +2,7 @@
 
 ## Projects
 
-### Simple blog :bookmark:
+### #1 Simple blog :bookmark:
    - client (React app)
    - event-bus (Express app that simulates an event-bus) 
    - services (Express services)
