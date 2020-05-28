@@ -1,12 +1,9 @@
 import React from 'react';
 
-import PostForm from './PostForm';
-import PostList from './PostList';
+import Posts from './Posts';
 
 export default () => (
   <div className="container">
-    <PostForm />
-    <hr />
-    <PostList />
+    <Posts />
   </div>
 );
