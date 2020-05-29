@@ -6,3 +6,5 @@ spec:
   containers:
     - name: posts
       image: blog/posts:0.0.1
+      ports:
+        - containerPort: 4000

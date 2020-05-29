@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posts-depl
+spec:
+  replicas: 1 # number of pods running some particular images
+  selector:
+    matchLabels:
+      app: posts
+  template: # pod configuration
+    metadata:
+      labels:
+        app: posts
+    spec: # pod configuration options
+      containers: # array of container
+        - name: posts
+          image: blog/posts:0.0.1
