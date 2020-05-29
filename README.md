@@ -1,12 +1,13 @@
 # Tutorial: Build projects with React & NodeJS microservices
 
-### Projects
--  Blog (section 2)
+## Projects
+
+### #1 Simple blog :bookmark:
    - client (React app)
-   - event-bus (simulate an event but with an express app)
-   - services
-     - posts
-     - comments
-     - query (what is responsible to provide data to the client)
+   - event-bus (Express app that simulates an event-bus) 
+   - services (Express services)
+     - posts (create posts)
+     - comments (create & update comments)
+     - query (Provide data to the client)
      - moderation (comment moderation service)
   
