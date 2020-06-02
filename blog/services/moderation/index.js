@@ -21,7 +21,7 @@ app.post('/events', async (req, res) => {
       }
     });
     
-    await axios.post('http://localhost:4005/events', { type: 'CommentModerated', data: { postId: data.postId, id: data.comment.id, status } });
+    await axios.post('http://event-bus-clusterip-srv:4005/events', { type: 'CommentModerated', data: { postId: data.postId, id: data.comment.id, status } });
   }
 
   res.send({ success: true });

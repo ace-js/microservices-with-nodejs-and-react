@@ -29,7 +29,7 @@ app.listen(4002, async () => {
 
 const eventSync = async () => {
   // get all stored event and handle them to be synchronized (simple way with duplication risks)
-  const res = await axios.get('http://localhost:4005/events');
+  const res = await axios.get('http://event-bus-clusterip-srv:4005/events');
   res.data.forEach(event => {
     handleEvent(event.type, event.data);
   });
