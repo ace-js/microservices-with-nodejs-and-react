@@ -6,4 +6,14 @@ NodePort under ubuntu:
 - check NodePort
 - kubectl get nodes -o wide
 - get an internal IP and add NodePort to access it 
-example: http://172.17.0.2:31348/posts
+example: http://172.17.0.2:30402/posts
+
+
+get deployments or pods or services:
+kubectl get wantedType (optional) targetname
+
+apply depl.yaml :
+kubectl apply -f filename
+
+restart deployment: 
+kubectl rollout restart deployment deplName

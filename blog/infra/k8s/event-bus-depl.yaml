@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-bus-depl
+spec:
+  replicas: 1 # number of pods running some particular images
+  selector:
+    matchLabels:
+      app: event-bus
+  template: # pod configuration
+    metadata:
+      labels:
+        app: event-bus
+    spec: # pod configuration options
+      containers: # array of container
+        - name: event-bus
+          image: acejs/blog-event-bus
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: event-bus-clusterip-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: event-bus
+  ports:
+    - name: event-bus
+      protocol: TCP
+      port: 4005
+      targetPort: 4005
