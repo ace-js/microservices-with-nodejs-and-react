@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: posts-srv
+spec:
+  type: NodePort # mainly for dev purposes (in prod we would use load balancer)
+  selector:
+    app: posts # we specify to this service to find all different pods with the label "app: posts" to expose them to the outside world
+  ports: # ports to expose on the target pod 
+  - name: posts # just for log purposes
+    protocol: TCP
+    port: 4000 # NodePort
+    targetPort: 4000 # pod 

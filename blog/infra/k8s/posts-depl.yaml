@@ -14,4 +14,4 @@ spec:
     spec: # pod configuration options
       containers: # array of container
         - name: posts
-          image: blog/posts:0.0.1
+          image: acejs/blog-posts
