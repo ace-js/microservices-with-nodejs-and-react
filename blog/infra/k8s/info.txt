@@ -1,0 +1,9 @@
+NodePort under ubuntu:
+- minikube start
+- eval $(minikube docker-env)
+- minikube tunnel
+- kubectl describe service serviceName
+- check NodePort
+- kubectl get nodes -o wide
+- get an internal IP and add NodePort to access it 
+example: http://172.17.0.2:31348/posts
