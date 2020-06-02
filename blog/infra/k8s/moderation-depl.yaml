@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moderation-depl
+spec:
+  replicas: 1 # number of pods running some particular images
+  selector:
+    matchLabels:
+      app: moderation
+  template: # pod configuration
+    metadata:
+      labels:
+        app: moderation
+    spec: # pod configuration options
+      containers: # array of container
+        - name: moderation
+          image: acejs/blog-moderation
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: moderation-nodeport-srv
+spec:
+  type: NodePort # mainly for dev purposes (in prod we would use load balancer)
+  selector:
+    app: moderation # we specify to this service to find all different pods with the label "app: moderation" to expose them to the outside world
+  ports: # ports to expose on the target pod 
+    - name: moderation # just for log purposes
+      protocol: TCP
+      port: 4003 # NodePort
+      targetPort: 4003 # pod   
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: moderation-clusterip-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: moderation
+  ports:
+    - name: moderation
+      protocol: TCP
+      port: 4003
+      targetPort: 4003

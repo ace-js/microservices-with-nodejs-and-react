@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: query-depl
+spec:
+  replicas: 1 # number of pods running some particular images
+  selector:
+    matchLabels:
+      app: query
+  template: # pod configuration
+    metadata:
+      labels:
+        app: query
+    spec: # pod configuration options
+      containers: # array of container
+        - name: query
+          image: acejs/blog-query
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: query-nodeport-srv
+spec:
+  type: NodePort # mainly for dev purposes (in prod we would use load balancer)
+  selector:
+    app: query # we specify to this service to find all different pods with the label "app: query" to expose them to the outside world
+  ports: # ports to expose on the target pod 
+    - name: query # just for log purposes
+      protocol: TCP
+      port: 4002 # NodePort
+      targetPort: 4002 # pod   
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: query-clusterip-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: query
+  ports:
+    - name: query
+      protocol: TCP
+      port: 4002
+      targetPort: 4002

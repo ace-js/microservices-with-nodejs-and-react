@@ -19,9 +19,9 @@ app.post('/events', (req, res) => {
   events.push(event);
 
   axios.post('http://posts_clusterip-srv:4000/events', event);
-  //axios.post('http://localhost:4001/events', event);
-  //axios.post('http://localhost:4002/events', event);
-  //axios.post('http://localhost:4003/events', event);
+  axios.post('http://comments_clusterip-srv:4001/events', event);
+  axios.post('http://query_clusterip-srv:4002/events', event);
+  axios.post('http://moderation_clusterip-srv:4003/events', event);
 
   res.send({ success: true });
 });

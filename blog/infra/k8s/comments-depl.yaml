@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: comments-depl
+spec:
+  replicas: 1 # number of pods running some particular images
+  selector:
+    matchLabels:
+      app: comments
+  template: # pod configuration
+    metadata:
+      labels:
+        app: comments
+    spec: # pod configuration options
+      containers: # array of container
+        - name: comments
+          image: acejs/blog-comments
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: comments-nodeport-srv
+spec:
+  type: NodePort # mainly for dev purposes (in prod we would use load balancer)
+  selector:
+    app: comments # we specify to this service to find all different pods with the label "app: comments" to expose them to the outside world
+  ports: # ports to expose on the target pod 
+    - name: comments # just for log purposes
+      protocol: TCP
+      port: 4001 # NodePort
+      targetPort: 4001 # pod   
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: comments-clusterip-srv
+spec:
+  type: ClusterIP
+  selector:
+    app: comments
+  ports:
+    - name: comments
+      protocol: TCP
+      port: 4001
+      targetPort: 4001
