@@ -15,7 +15,9 @@ spec:
       containers: # array of container
         - name: event-bus
           image: acejs/blog-event-bus
+
 ---
+
 apiVersion: v1
 kind: Service
 metadata:

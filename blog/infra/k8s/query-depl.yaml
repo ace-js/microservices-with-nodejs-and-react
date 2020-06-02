@@ -15,7 +15,9 @@ spec:
       containers: # array of container
         - name: query
           image: acejs/blog-query
+
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -29,7 +31,9 @@ spec:
       protocol: TCP
       port: 4002 # NodePort
       targetPort: 4002 # pod   
+
 ---
+
 apiVersion: v1
 kind: Service
 metadata:

@@ -15,7 +15,9 @@ spec:
       containers: # array of container
         - name: comments
           image: acejs/blog-comments
+
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -28,8 +30,10 @@ spec:
     - name: comments # just for log purposes
       protocol: TCP
       port: 4001 # NodePort
-      targetPort: 4001 # pod   
+      targetPort: 4001 # pod  
+ 
 ---
+
 apiVersion: v1
 kind: Service
 metadata:

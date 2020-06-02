@@ -15,7 +15,9 @@ spec:
       containers: # array of container
         - name: moderation
           image: acejs/blog-moderation
+
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -29,7 +31,9 @@ spec:
       protocol: TCP
       port: 4003 # NodePort
       targetPort: 4003 # pod   
+
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
