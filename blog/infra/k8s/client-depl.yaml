@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client-depl
+spec:
+  replicas: 1 # number of pods running some particular images
+  selector:
+    matchLabels:
+      app: client
+  template: # pod configuration
+    metadata:
+      labels:
+        app: client
+    spec: # pod configuration options
+      containers: # array of container
+        - name: client
+          image: acejs/blog-client
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: client-clusterip-srv
+spec:
+  type: ClusterIP # mainly for dev purposes (in prod we would use load balancer)
+  selector:
+    app: client # we specify to this service to find all different pods with the label "app: client" to expose them to the outside world
+  ports: # ports to expose on the target pod 
+    - name: client # just for log purposes
+      protocol: TCP
+      port: 3000 # NodePort
+      targetPort: 3000 # pod  

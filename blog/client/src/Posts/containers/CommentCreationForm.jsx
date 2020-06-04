@@ -12,7 +12,7 @@ const CommentCreationForm = ({ postId, doFetch }) => {
   const onSubmitHandler = async (e) => {
     e.preventDefault();
     if (content) {
-      await axios.post(`http://localhost:4001/posts/${postId}/comments`, { content });
+      await axios.post(`http://my-blog.io/posts/${postId}/comments`, { content });
       setContent('');
       doFetch();
     }

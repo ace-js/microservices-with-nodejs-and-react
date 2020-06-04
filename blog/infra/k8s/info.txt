@@ -17,3 +17,10 @@ kubectl apply -f filename
 
 restart deployment: 
 kubectl rollout restart deployment deplName
+
+
+How to work with ingress/loadbalancer in localhost ?
+- add minikube ip (Linux) or 127.0.0.1 (macOs) followed by targeted domain  in /etc/hosts file
+example :
+172.17.0.2 my-blog.io
+

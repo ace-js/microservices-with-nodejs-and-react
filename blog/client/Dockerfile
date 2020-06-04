@@ -1,6 +1,9 @@
 # from a specific image
 FROM node:alpine
 
+# fix react-app running in container
+ENV CI=true
+
 # Create a work directory
 WORKDIR /app
 

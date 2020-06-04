@@ -1,0 +1,63 @@
+# automated build & deployment with skaffold.dev
+apiVersion: skaffold/v2alpha3
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/* # tells to skaffold that there are here some config files to watch changes for kubernetes
+build:
+  local:
+    push: false
+  artifacts:
+    - image: acejs/blog-client
+      context: client # client directory
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: 'src/**/*js'
+            dest: .
+          - src: 'src/**/*jsx'
+            dest: .
+    
+
+    - image: acejs/blog-posts
+      context: services/posts
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '**/*js'
+            dest: .
+    - image: acejs/blog-comments
+      context: services/comments
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '**/*js'
+            dest: .
+    - image: acejs/blog-query
+      context: services/query
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '**/*js'
+            dest: .
+    - image: acejs/blog-moderation
+      context: services/moderation
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '**/*js'
+            dest: .
+    - image: acejs/blog-event-bus
+      context: event-bus
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: '**/*js'
+            dest: .

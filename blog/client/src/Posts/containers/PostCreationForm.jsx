@@ -14,7 +14,7 @@ const PostCreationForm = ({ doFetch }) => {
     e.preventDefault();
     if (title) {
       try {
-        await axios.post('http://localhost:4000/posts', { title });
+        await axios.post('http://my-blog.io/posts/create', { title });
         setTitle('');
         doFetch();
       } catch (error) {
