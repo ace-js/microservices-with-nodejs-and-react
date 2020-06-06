@@ -17,5 +17,15 @@
     "express-validator": "^6.5.0",
     "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.9.5"
+  },
+  "devDependencies": {
+    "husky": "^4.2.5",
+    "prettier": "^2.0.5",
+    "pretty-quick": "^2.0.1"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
   }
 }
