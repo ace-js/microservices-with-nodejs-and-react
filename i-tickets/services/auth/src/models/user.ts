@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import jwt from 'jsonwebtoken';
 
 import { Password } from '../utils/password';
 
@@ -17,6 +18,7 @@ interface UserModel extends mongoose.Model<UserDoc> {
 interface UserDoc extends mongoose.Document {
   email: string;
   password: string;
+  generateAuthToken(): string;
 }
 
 const userSchema = new mongoose.Schema({
@@ -41,6 +43,22 @@ userSchema.pre('save', async function (done) {
 
 userSchema.statics.build = (attrs: UserAttrs): object => {
   return new User(attrs);
+};
+
+// Add a document method to return JWT
+userSchema.methods.generateAuthToken = function (): string {
+  const token = jwt.sign(
+    {
+      data: {
+        id: this._id.toString(),
+        email: this.email
+      }
+    },
+    'SECRET_KEY',
+    { expiresIn: '2h' }
+  );
+
+  return token;
 };
 
 const User = mongoose.model<UserDoc, UserModel>('User', userSchema);

@@ -15,5 +15,5 @@ export default async (req: Request, res: Response) => {
   const user = User.build({ email, password });
   await user.save();
 
-  return res.status(201).send(user);
+  return res.status(201).send({ token: user.generateAuthToken() });
 };
