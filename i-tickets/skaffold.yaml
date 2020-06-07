@@ -9,7 +9,7 @@ build:
     push: false
   artifacts:
     - image: acejs/itickets-auth
-      context: ./auth
+      context: ./services/auth
       docker:
         dockerfile: Dockerfile
       sync:
