@@ -41,7 +41,7 @@ userSchema.pre('save', async function (done) {
   done();
 });
 
-userSchema.statics.build = (attrs: UserAttrs): object => {
+userSchema.statics.build = (attrs: UserAttrs): UserDoc => {
   return new User(attrs);
 };
 
@@ -49,13 +49,11 @@ userSchema.statics.build = (attrs: UserAttrs): object => {
 userSchema.methods.generateAuthToken = function (): string {
   const token = jwt.sign(
     {
-      data: {
-        id: this._id.toString(),
-        email: this.email
-      }
+      id: this._id.toString(),
+      email: this.email
     },
-    'SECRET_KEY',
-    { expiresIn: '2h' }
+    process.env.JWT_KEY!,
+    { expiresIn: '15min' }
   );
 
   return token;

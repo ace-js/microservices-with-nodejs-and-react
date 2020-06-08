@@ -15,9 +15,14 @@ spec:
       containers:
         - name: auth
           image: acejs/itickets-auth
+          env: # set env variables from k8s node
+            - name: JWT_KEY #name assign as pod env variable
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret #secret container
+                  key: JWT_KEY #secret targeted key
 
 ---
-
 apiVersion: v1
 kind: Service
 metadata:

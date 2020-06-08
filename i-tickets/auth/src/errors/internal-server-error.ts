@@ -1,4 +1,4 @@
-import { CustomError } from "./custom-error";
+import { CustomError } from './custom-error';
 
 export class InternalServerError extends CustomError {
   statusCode = 500;
@@ -12,8 +12,8 @@ export class InternalServerError extends CustomError {
   serializeErrors() {
     return [
       {
-        message: this.message,
-      },
+        message: this.message
+      }
     ];
   }
 }
