@@ -7,6 +7,7 @@ import cookieSession from 'cookie-session';
 import router from './routes';
 import errorHandler from './middlewares/error-handler';
 import { NotFoundError } from './errors/not-found-error';
+import currentUserMiddleware from './middlewares/current-user';
 
 const app = express();
 
@@ -18,6 +19,18 @@ app.use(
     secure: true
   })
 );
+
+declare global {
+  namespace Express {
+    interface Request {
+      session: {
+        jwt: string;
+      } | null;
+    }
+  }
+}
+
+app.use(currentUserMiddleware);
 
 app.use('/api/users', router);
 

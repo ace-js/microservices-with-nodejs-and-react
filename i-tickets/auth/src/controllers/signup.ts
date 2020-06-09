@@ -20,5 +20,5 @@ export default async (req: Request, res: Response) => {
     jwt: user.generateAuthToken()
   };
 
-  return res.status(201).send();
+  return res.status(201).send(user);
 };

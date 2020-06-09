@@ -12,6 +12,7 @@ export default (
     return res.status(err.statusCode).send({ errors: err.serializeErrors() });
   }
 
+  console.log(err.message);
   res.status(500).send({
     errors: [{ message: 'Something went wrong' }]
   });
