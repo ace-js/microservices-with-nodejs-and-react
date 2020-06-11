@@ -1,45 +1,6 @@
-import express from 'express';
-import 'express-async-errors'; // allows throwing error inan async route to avoid awaiting promise response
-import { json } from 'body-parser';
 import mongoose from 'mongoose';
-import cookieSession from 'cookie-session';
 
-import router from './routes';
-import errorHandler from './middlewares/error-handler';
-import { NotFoundError } from './errors/not-found-error';
-import currentUserMiddleware from './middlewares/current-user';
-
-const app = express();
-
-app.set('trust proxy', true); // trust traffic from ingress-nginx
-app.use(json());
-app.use(
-  cookieSession({
-    signed: false,
-    secure: true
-  })
-);
-
-declare global {
-  namespace Express {
-    interface Request {
-      session: {
-        jwt: string;
-      } | null;
-    }
-  }
-}
-
-app.use(currentUserMiddleware);
-
-app.use('/api/users', router);
-
-// not found routes
-app.all('*', async (req, res) => {
-  throw new NotFoundError();
-});
-
-app.use(errorHandler);
+import app from './app';
 
 const start = async () => {
   if (!process.env.JWT_KEY) {
