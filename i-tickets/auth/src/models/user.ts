@@ -66,7 +66,7 @@ userSchema.methods.generateAuthToken = function (): string {
       email: this.email
     },
     process.env.JWT_KEY!,
-    { expiresIn: '15min' }
+    { expiresIn: '2h' }
   );
 
   return token;

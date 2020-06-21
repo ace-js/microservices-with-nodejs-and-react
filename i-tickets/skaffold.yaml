@@ -16,3 +16,13 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
+    - image: acejs/itickets-client
+      context: ./client
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.jsx"
+            dest: .
+          - src: "src/**/*.js"
+            dest: .
