@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import Router from 'next/router';
+import React, { useState } from "react";
+import Router from "next/router";
 
-import useRequest from '../../hooks/use-request';
-import ErrorAlert from '../../components/error-alert';
+import useRequest from "../../hooks/use-request";
+import ErrorAlert from "../../components/error-alert";
 
-export default () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+const SignupPage = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const { doRequest, reset, errors } = useRequest({
-    url: '/api/users/signup',
-    method: 'post',
-    body: { email, password }
+    url: "/api/users/signup",
+    method: "post",
+    body: { email, password },
   });
 
   const onSubmitHandler = async (e) => {
@@ -18,36 +18,36 @@ export default () => {
 
     const response = await doRequest();
 
-    if (response.success) Router.push('/');
+    if (response.success) Router.push("/");
   };
 
   return (
-    <div className='container'>
+    <div className="container">
       <h1>Sign up</h1>
       <form onSubmit={onSubmitHandler}>
-        <div className='form-group'>
-          <label htmlFor='email'>Email Address</label>
+        <div className="form-group">
+          <label htmlFor="email">Email Address</label>
           <input
-            type='text'
-            name='email'
-            id='email'
-            className='form-control'
+            type="text"
+            name="email"
+            id="email"
+            className="form-control"
             value={email}
             onChange={({ target }) => setEmail(target.value)}
           />
         </div>
-        <div className='form-group'>
-          <label htmlFor='password'>Password</label>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
           <input
-            type='password'
-            name='password'
-            id='password'
-            className='form-control'
+            type="password"
+            name="password"
+            id="password"
+            className="form-control"
             value={password}
             onChange={({ target }) => setPassword(target.value)}
           />
         </div>
-        <button type='submit' className='btn btn-primary'>
+        <button type="submit" className="btn btn-primary">
           Sign up
         </button>
       </form>
@@ -56,3 +56,5 @@ export default () => {
     </div>
   );
 };
+
+export default SignupPage;

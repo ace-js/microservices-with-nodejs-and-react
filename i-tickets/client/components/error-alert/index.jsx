@@ -1,10 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types'
+import React from "react";
+import PropTypes from "prop-types";
 
 const ErrorAlert = ({ errors = [], close }) => {
   return errors.length ? (
-    <div className='alert alert-danger alert-dismissible'>
-      <button className='close' data-dismiss='alert' onClick={close}>
+    <div className="alert alert-danger alert-dismissible">
+      <button className="close" data-dismiss="alert" onClick={close}>
         &times;
       </button>
       <h4>Ooops..</h4>
@@ -20,9 +20,10 @@ const ErrorAlert = ({ errors = [], close }) => {
 ErrorAlert.propTypes = {
   errors: PropTypes.arrayOf(
     PropTypes.shape({
-      message: PropTypes.string.isRequired
+      message: PropTypes.string.isRequired,
     })
   ).isRequired,
-  close: PropTypes.func.isRequired
-}
-export default  ErrorAlert;
+  close: PropTypes.func.isRequired,
+};
+
+export default ErrorAlert;

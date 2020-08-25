@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import axios from 'axios';
+import { useState } from "react";
+import axios from "axios";
 
-export default ({ url, method, body }) => {
+const useRequest = ({ url, method, body }) => {
   const [errors, setErrors] = useState([]);
 
   const doRequest = async () => {
     try {
       reset();
       if (!url || !method) {
-        throw Error('Parameters error');
+        throw Error("Parameters error");
       }
 
       const response = await axios[method](url, body);
@@ -26,3 +26,5 @@ export default ({ url, method, body }) => {
 
   return { doRequest, reset, errors };
 };
+
+export default useRequest;
