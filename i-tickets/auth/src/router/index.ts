@@ -1,6 +1,6 @@
 import express from 'express';
 
-import validate from '../middlewares/request-validator';
+import { requestValidationMiddleware as validate } from '@ab-itickets/common';
 
 import currentUserController from '../controllers/current-user';
 import signoutController from '../controllers/signout';

@@ -2,11 +2,9 @@ import express from 'express';
 import 'express-async-errors'; // allows throwing error inan async route to avoid awaiting promise response
 import { json } from 'body-parser';
 import cookieSession from 'cookie-session';
+import { NotFoundError, errorHandlerMiddleware, currentUserMiddleware } from '@ab-itickets/common'
 
 import router from './router';
-import errorHandler from './middlewares/error-handler';
-import { NotFoundError } from './errors/not-found-error';
-import currentUserMiddleware from './middlewares/current-user';
 
 const app = express();
 
@@ -38,6 +36,6 @@ app.all('*', () => {
   throw new NotFoundError();
 });
 
-app.use(errorHandler);
+app.use(errorHandlerMiddleware);
 
 export default app;

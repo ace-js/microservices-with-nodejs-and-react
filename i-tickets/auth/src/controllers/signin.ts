@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
+import { BadRequestError } from '@ab-itickets/common';
 
 import User from '../models/user';
-import { BadRequestError } from '../errors/bad-request-error';
 import { Password } from '../utils/password';
 
 export default async (req: Request, res: Response) => {

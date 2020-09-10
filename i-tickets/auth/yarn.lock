@@ -2,6 +2,16 @@
 # yarn lockfile v1
 
 
+"@ab-itickets/common@^1.0.8":
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/@ab-itickets/common/-/common-1.0.8.tgz#a3a8db68dd9440dff5bb51c717caba9f47885306"
+  integrity sha512-5hs7kNrNcs1As2xaAIA3RAfdi6zoS9ogXzamfD43d3E0Udvi/KVWxHtDX9C9M/hUwxywuXe7R2t2YTFh2kc5qQ==
+  dependencies:
+    cookie-session "^1.4.0"
+    express "^4.17.1"
+    express-validator "^6.6.1"
+    jsonwebtoken "^8.5.1"
+
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.10.4":
   version "7.10.4"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.10.4.tgz#168da1a36e90da68ae8d49c0f1b48c7c6249213a"
@@ -1786,7 +1796,7 @@ express-async-errors@^3.1.1:
   resolved "https://registry.yarnpkg.com/express-async-errors/-/express-async-errors-3.1.1.tgz#6053236d61d21ddef4892d6bd1d736889fc9da41"
   integrity sha512-h6aK1da4tpqWSbyCa3FxB/V6Ehd4EEB15zyQq9qe75OZBp0krinNKuH4rAY+S/U/2I36vdLAUFSjQJ+TFmODng==
 
-express-validator@^6.5.0:
+express-validator@^6.5.0, express-validator@^6.6.1:
   version "6.6.1"
   resolved "https://registry.yarnpkg.com/express-validator/-/express-validator-6.6.1.tgz#c53046f615d27fcb78be786e018dcd60bd9c6c5c"
   integrity sha512-+MrZKJ3eGYXkNF9p9Zf7MS7NkPJFg9MDYATU5c80Cf4F62JdLBIjWxy6481tRC0y1NnC9cgOw8FuN364bWaGhA==
