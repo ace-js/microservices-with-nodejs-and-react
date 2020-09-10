@@ -1,6 +1,4 @@
-[submodule "i-tickets/i-tickets/common"]
-	path = i-tickets/i-tickets/common
-	url = https://github.com/ace-js/microservices-with-nodejs-and-react.git
-[submodule "i-tickets/shared"]
-	path = i-tickets/shared
+
+[submodule "i-tickets/common"]
+	path = i-tickets/common
 	url = git@github.com:ace-js/i-tickets-common.git
