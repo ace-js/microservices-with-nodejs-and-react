@@ -1,23 +1,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: auth-depl
+  name: tickets-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: auth
+      app: tickets
   template:
     metadata:
       labels:
-        app: auth
+        app: tickets
     spec:
       containers:
-        - name: auth
-          image: acejs/itickets-auth
+        - name: tickets
+          image: acejs/itickets-tickets
           env: # set env variables from k8s node
             - name: DB_URI
-              value: "mongodb://auth-mongo-srv:27017/auth"
+              value: "mongodb://tickets-mongo-srv:27017/tickets"
             - name: JWT_KEY #name assign as pod env variable
               valueFrom:
                 secretKeyRef:
@@ -28,13 +28,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: auth-srv
+  name: tickets-srv
 spec:
   type: ClusterIP
   selector:
-    app: auth # this service has to find a set of pods with this label "app: auth"
+    app: tickets # this service has to find a set of pods with this label "app: tickets"
   ports:
-    - name: auth
+    - name: tickets
       protocol: TCP
       port: 3000
       targetPort: 3000
