@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 
-const useRequest = ({ url, method, body }) => {
+const useRequest = ({ url, method, body, onSuccess }) => {
   const [errors, setErrors] = useState([]);
 
   const doRequest = async () => {
@@ -13,11 +13,14 @@ const useRequest = ({ url, method, body }) => {
 
       const response = await axios[method](url, body);
 
+      if (onSuccess) {
+        onSuccess();
+      }
+
       return { success: true, data: response.data };
     } catch (error) {
       if (error.response && error.response.data)
         setErrors(error.response.data.errors);
-
       return { success: false };
     }
   };
