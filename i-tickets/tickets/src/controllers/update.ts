@@ -10,7 +10,7 @@ export default async (req: Request, res: Response) => {
   if (!ticket) throw new NotFoundError();
   if (ticket.userId !== req.currentUser!.id)
     throw new UnauthorizedError(
-      "You cannot update a ticket that doesn\t belong to you"
+      "You cannot update a ticket that doesn\\'t belong to you"
     );
 
   ticket.set({
