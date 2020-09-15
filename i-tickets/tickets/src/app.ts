@@ -10,6 +10,16 @@ import {
 
 import router from "./router";
 
+declare global {
+  namespace Express {
+    interface Request {
+      session: {
+        jwt: string;
+      } | null;
+    }
+  }
+}
+
 const app = express();
 
 app.set("trust proxy", true); // trust traffic from ingress-nginx
@@ -20,16 +30,6 @@ app.use(
     secure: process.env.NODE_ENV !== "dev-testing",
   })
 );
-
-declare global {
-  namespace Express {
-    interface Request {
-      session: {
-        jwt: string;
-      } | null;
-    }
-  }
-}
 
 app.use(currentUserMiddleware);
 
