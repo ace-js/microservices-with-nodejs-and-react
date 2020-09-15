@@ -1,11 +1,16 @@
+import { generateObjectId } from "./../utils/generate-objectid";
 import { MongoMemoryServer } from "mongodb-memory-server";
 import mongoose from "mongoose";
 import jwt from "jsonwebtoken";
+import request from "supertest";
+
+import app from "../app";
 
 declare global {
   namespace NodeJS {
     interface Global {
       signin(): string;
+      createTicket(title: string, price: number): Promise<request.Response>;
     }
   }
 }
@@ -39,7 +44,7 @@ afterAll(async () => {
 global.signin = (): string => {
   // build a JWT payload { id, email }
   const payload = {
-    id: "seodmjkfs",
+    id: generateObjectId(),
     email: "test@test.com",
   };
 
@@ -59,4 +64,14 @@ global.signin = (): string => {
 
   // return a string cookie
   return "express:sess=" + encodedSession;
+};
+
+global.createTicket = (
+  title: string,
+  price: number
+): Promise<request.Response> => {
+  return request(app)
+    .post("/api/tickets")
+    .set("Cookie", global.signin())
+    .send({ title, price });
 };

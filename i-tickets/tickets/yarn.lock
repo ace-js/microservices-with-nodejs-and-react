@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@ab-itickets/common@^1.0.8":
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/@ab-itickets/common/-/common-1.0.11.tgz#4f2578ec94965c7f4b36c3cc91c5c62b2da3e816"
-  integrity sha512-l4b4liPv+HDltE7MeGJIKNgt+6CbojsiBe37S7XQiIqMN0BhNwsBoT9k6OJOT0B2og0b2PYvXm7DlMS8IBHNwg==
+"@ab-itickets/common@^1.0.12":
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/@ab-itickets/common/-/common-1.0.12.tgz#b2bf06d5b9c8c1714ce4a53a4294fbd73ca06cdc"
+  integrity sha512-Ejz8co4XJF1qK9zXEizlXfPr+IU/bm/tiFR7ISLLTKr4ijPpRB3CLZpjX3ME4KsRlZhUyAcrJXs3vYe3ja8UgQ==
   dependencies:
     cookie-session "^1.4.0"
     express "^4.17.1"
