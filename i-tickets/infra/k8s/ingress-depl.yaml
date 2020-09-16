@@ -18,6 +18,10 @@ spec:
             backend:
               serviceName: tickets-srv
               servicePort: 3000
+          - path: /monitoring/nats/?(.*)
+            backend:
+              serviceName: nats-srv
+              servicePort: 8222
           - path: /?(.*)
             backend:
               serviceName: client-srv
