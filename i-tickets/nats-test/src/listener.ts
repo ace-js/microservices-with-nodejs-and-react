@@ -10,13 +10,21 @@ const stan = nats.connect("itickets", randomBytes(4).toString("hex"), {
 stan.on("connect", () => {
   console.log("Listened connected to NATS");
 
-  const options = stan.subscriptionOptions().setManualAckMode(true);
+  stan.on("close", () => {
+    console.log("NATS connection closed");
+    process.exit();
+  });
+
+  const options = stan
+    .subscriptionOptions()
+    .setManualAckMode(true)
+    .setDurableName("listener-subscription-name"); // set a durable subscription and returns after restart all events not processed (acknowleged) by the subscription name in case of service unavailable for a while
 
   const subscription = stan.subscribe(
     "ticket:created",
-    "orders-service-queue-group",
+    "listener-queue-group",
     options
-  ); // queue group handle the fact that only one instence of this queue group handle this event (in case of multiple µservice replicas)
+  ); // queue group handle the fact that only one instence of this queue group handle a specific event (in case of multiple µservice replicas)
 
   subscription.on("message", (msg: Message) => {
     const data = msg.getData();
@@ -27,3 +35,8 @@ stan.on("connect", () => {
     msg.ack(); // tels that event has been properly handled by this queue group
   });
 });
+
+// listen interupt signal
+process.on("SIGINT", () => stan.close());
+// listen terminate signal
+process.on("SIGTERM", () => stan.close());
