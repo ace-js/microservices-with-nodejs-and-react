@@ -1,5 +1,7 @@
-import nats, { Message } from "node-nats-streaming";
+import nats from "node-nats-streaming";
 import { randomBytes } from "crypto";
+
+import { TicketCreatedListener } from "./ticket-created-listener.class";
 
 console.clear();
 
@@ -15,25 +17,7 @@ stan.on("connect", () => {
     process.exit();
   });
 
-  const options = stan
-    .subscriptionOptions()
-    .setManualAckMode(true)
-    .setDurableName("listener-subscription-name"); // set a durable subscription and returns after restart all events not processed (acknowleged) by the subscription name in case of service unavailable for a while
-
-  const subscription = stan.subscribe(
-    "ticket:created",
-    "listener-queue-group",
-    options
-  ); // queue group handle the fact that only one instence of this queue group handle a specific event (in case of multiple µservice replicas)
-
-  subscription.on("message", (msg: Message) => {
-    const data = msg.getData();
-    if (typeof data === "string") {
-      console.log(`Received event #${msg.getSequence()}, with data: ${data}`);
-    }
-
-    msg.ack(); // tels that event has been properly handled by this queue group
-  });
+  new TicketCreatedListener(stan).listen();
 });
 
 // listen interupt signal
